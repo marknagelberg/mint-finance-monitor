@@ -34,14 +34,3 @@ class TransactionData():
             self.data = self.data[self.data["Date"] >= begin_datetime]
         if end_datetime:
             self.data = self.data[self.data["Date"] <= end_datetime]
-
-a = TransactionData("transactions.csv")
-print a.data.dtypes
-print a.data.head()
-print a.after_tax_income()
-print a.spending()
-print a.savings_rate()
-import datetime
-a.filter_dates(datetime.date(year=2014, month=1, day=1), datetime.date(year=2014, month=2, day=1))
-print a.data.dtypes
-print a.data.head()
