@@ -1,20 +1,31 @@
-all_time_after_tax_income
-{{all_time_after_tax_income}}
+<html>
+    <head>
+    </head>
 
-all_time_spending
-{{all_time_spending}}
+    <body>
+        <h1>Monthly Mint Financial Independence Report</h1>
 
-all_time_savings_rate
-{{all_time_savings_rate}}
+        <div class="all-time">
+            <h2>All-Time Performance (since starting Mint)</h2>
+            Total income: {{all_time_after_tax_income | currency_filter}}
+            <br>
 
+            Total spending: {{all_time_spending | currency_filter}}
+            <br>
 
-last_month_after_tax_income
-{{last_month_after_tax_income}}
-
-last_month_spending
-{{last_month_spending}}
-
-last_month_savings_rate
-{{last_month_savings_rate}}
+            Savings rate: {{all_time_savings_rate | percentage_filter}}
+        </div>
 
 
+        <div class="last-month">
+            <h2>Last Month's Performance</h2>
+            Total income: {{last_month_after_tax_income | currency_filter}}
+            <br>
+
+            Total spending: {{last_month_spending | currency_filter}}
+
+            <br>
+            Savings rate: {{last_month_savings_rate | percentage_filter}}
+
+        </div>
+</html>
