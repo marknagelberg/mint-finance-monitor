@@ -20,7 +20,7 @@ def years_to_fi_filter(savings_rate):
     net_worth = 0
 
     while net_worth * .04  < income * (1 - savings_rate):
-        net_worth = net_worth * .05 + income * savings_rate
+        net_worth = net_worth * 1.05 + income * savings_rate
         year += 1
 
     return year
@@ -33,6 +33,7 @@ if __name__ == '__main__':
 
     env.filters['currency_filter'] = currency_filter
     env.filters['percentage_filter'] = percentage_filter
+    env.filters['years_to_fi_filter'] = years_to_fi_filter
 
     template = env.get_template('email.html')
 
