@@ -29,8 +29,18 @@ class TransactionData():
         labels_to_remove = self.data[self.data["Labels"].isin(TransactionData.remove_from_expenses_and_income)]["Amount"].sum()
         return categories_to_remove + labels_to_remove
 
-    def filter_dates(self, begin_datetime = None, end_datetime = None):
+    def years_covered(self):
+        years = [date.year for date in self.data["Date"]]
+        years = list(set(years))
+        years.sort()
+        return years
+
+    def filter_dates(self, begin_datetime = None, end_datetime = None, year = None, month = None):
         if begin_datetime:
             self.data = self.data[self.data["Date"] >= begin_datetime]
         if end_datetime:
             self.data = self.data[self.data["Date"] <= end_datetime]
+        if year:
+            self.data = self.data[self.data["Date"].dt.year == year]
+        if month:
+            self.data = self.data[self.data["Date"].dt.month == month]
