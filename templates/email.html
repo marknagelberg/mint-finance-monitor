@@ -14,6 +14,10 @@
             <br>
 
             Savings rate: {{all_time_savings_rate | percentage_filter}}
+
+            <br>
+            At this savings rate, we become financially independent after
+            {{all_time_savings_rate | years_to_fi_filter}} total working years!
         </div>
 
 
@@ -28,9 +32,8 @@
             Savings rate: {{last_month_savings_rate | percentage_filter}}
 
             <br>
-            If we have this savings rate all the time, we would have to work for
-            {{last_month_savings_rate | years_to_fi_filter}} years in total to reach 
-            financial independence!
+            If we have this savings rate all the time, we become financially independent after
+            {{last_month_savings_rate | years_to_fi_filter}} total working years!
 
         </div>
 
