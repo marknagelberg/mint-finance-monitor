@@ -45,6 +45,14 @@ if __name__ == '__main__':
     template_context["all_time_spending"] = all_time_transactions.spending()
     template_context["all_time_savings_rate"] = all_time_transactions.savings_rate()
 
+    annual_savings_trend = []
+    for year in all_time_transactions.years_covered():
+        annual_transaction = TransactionData("transactions.csv")
+        annual_transaction.filter_dates(year = year)
+        annual_savings_trend.append((year, annual_transaction.savings_rate()))
+
+    template_context["annual_savings_trend"] = annual_savings_trend
+
     last_month_transactions = TransactionData("transactions.csv")
     current_time = datetime.datetime.now()
     last_month = current_time.month - 1
@@ -54,7 +62,7 @@ if __name__ == '__main__':
         last_month_year = last_month_year - 1
 
 
-    last_month_transactions.filter_dates(begin_datetime = datetime.date(day = 1, month = last_month, year = last_month_year))
+    last_month_transactions.filter_dates(year = last_month_year, month = last_month)
 
     template_context["last_month_after_tax_income"] = last_month_transactions.after_tax_income()
     template_context["last_month_spending"] = last_month_transactions.spending()

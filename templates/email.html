@@ -33,4 +33,11 @@
             financial independence!
 
         </div>
+
+        <div class="savings-trend">
+            <h2>Annual Trend in Savings Rate</h2>
+            {% for year_savings in annual_savings_trend %}
+            {{year_savings[0]}}: {{year_savings[1] | percentage_filter}}
+            <br>
+            {% endfor %}
 </html>
