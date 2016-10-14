@@ -68,6 +68,9 @@ if __name__ == '__main__':
     template_context["last_month_spending"] = last_month_transactions.spending()
     template_context["last_month_savings_rate"] = last_month_transactions.savings_rate()
 
+    #Hard code the year you began working
+    template_context["year_work_began"] = 2011
+
     html  =  template.render(template_context)
 
     email_info = json.load(open('emails.json'))
