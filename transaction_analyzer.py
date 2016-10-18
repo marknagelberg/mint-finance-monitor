@@ -44,3 +44,7 @@ class TransactionData():
             self.data = self.data[self.data["Date"].dt.year == year]
         if month:
             self.data = self.data[self.data["Date"].dt.month == month]
+
+if __name__ == "__main__":
+    a = TransactionData("transactions.csv")
+    print a.average_annual_spending()

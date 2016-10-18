@@ -5,6 +5,9 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
+import pandas as pd
+import csv
+import numpy as np
 
 def currency_filter(value):
     return "${:,.0f}".format(value)
@@ -67,9 +70,30 @@ if __name__ == '__main__':
     template_context["last_month_after_tax_income"] = last_month_transactions.after_tax_income()
     template_context["last_month_spending"] = last_month_transactions.spending()
     template_context["last_month_savings_rate"] = last_month_transactions.savings_rate()
+    template_context["last_month_net_worth_required_for_fi"] = template_context["last_month_spending"] * 12 * 25
 
     #Hard code the year you began working
     template_context["year_work_began"] = 2011
+
+    net_worth_data = pd.read_csv('trends.csv')
+    current_net_worth = net_worth_data[-1:]["Net"].str.replace("$","").str.replace(",","").astype(float)
+    current_net_worth =  current_net_worth.values[0]
+
+    template_context["current_net_worth"] = current_net_worth
+
+    template_context["current_safe_withdrawal_amount"] = current_net_worth * .04
+
+    annual_spending_trend = []
+    for year in all_time_transactions.years_covered():
+        annual_transaction = TransactionData("transactions.csv")
+        annual_transaction.filter_dates(year = year)
+        annual_spending_trend.append((year, annual_transaction.spending()))
+    template_context["annual_spending_trend"] = annual_spending_trend
+
+    average_annual_spending = np.mean([x[1] for x in annual_spending_trend])
+    template_context["average_annual_spending"] = average_annual_spending
+
+    template_context["all_time_net_worth_required_for_fi"] = average_annual_spending * 25
 
     html  =  template.render(template_context)
 

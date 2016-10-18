@@ -18,6 +18,19 @@
             <br>
             At this savings rate, we become financially independent after
             {{all_time_savings_rate | years_to_fi_filter}} total working years ({{ (all_time_savings_rate | years_to_fi_filter) - (annual_savings_trend[-1][0] - year_work_began)}} remaining years of work)!
+
+            <br>
+
+            Current net worth: {{current_net_worth | currency_filter}}
+
+            <br>
+            If we retire now, we could safely withdraw {{current_safe_withdrawal_amount | currency_filter}}
+            each year from our savings.
+
+            <br>
+            Approximate amount of net worth we need to be financially independent,
+            given our overall average spending and savings levels:
+            {{all_time_net_worth_required_for_fi | currency_filter}}
         </div>
 
 
@@ -34,6 +47,11 @@
             <br>
             If we have this savings rate all the time, we become financially independent after
             {{last_month_savings_rate | years_to_fi_filter}} total working years ({{ (last_month_savings_rate | years_to_fi_filter) - (annual_savings_trend[-1][0] - year_work_began)}} remaining years of work)!
+
+            <br>
+            Approximate amount of net worth we would need to be financially independent,
+            assuming we continue spending the same amount as last month: 
+            {{last_month_net_worth_required_for_fi | currency_filter}}
 
         </div>
 
