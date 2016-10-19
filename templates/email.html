@@ -24,6 +24,11 @@
             Current net worth: {{current_net_worth | currency_filter}}
 
             <br>
+
+            Average annual spending: {{average_annual_spending | currency_filter}}
+
+            <br>
+
             If we retire now, we could safely withdraw {{current_safe_withdrawal_amount | currency_filter}}
             each year from our savings.
 
@@ -63,4 +68,14 @@
             to reach financial independence)
             <br>
             {% endfor %}
+        </div>
+
+        <div class="spending-trend">
+            <h2>Annual Trend in Spending</h2>
+            {% for year_spending in annual_spending_trend %}
+            {{year_spending[0]}}: {{year_spending[1] | currency_filter}}
+            ({{(year_spending[1] * 25) | currency_filter}} net worth required for financial independence)
+            <br>
+            {% endfor %}
+        </div>
 </html>
