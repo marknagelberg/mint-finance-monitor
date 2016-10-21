@@ -78,4 +78,21 @@
             <br>
             {% endfor %}
         </div>
+
+        <div class="top-spending-categories-last-month">
+            <h2>Top 10 Spending Categories Last Month</h2>
+            {% for category in top_10_last_month_spending_categories %}
+            {{category[0]}}: {{category[1] | currency_filter}}
+            <br>
+            {% endfor %}
+        </div>
+
+        <div class="top-spending-categories-all-time">
+            <h2>Top 10 Spending Categories of all Time</h2>
+            {% for category in top_10_all_time_spending_categories %}
+            {{category[0]}}: {{category[1] | currency_filter}}
+            <br>
+            {% endfor %}
+        </div>
+
 </html>

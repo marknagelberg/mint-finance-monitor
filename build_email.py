@@ -72,6 +72,13 @@ if __name__ == '__main__':
     template_context["last_month_savings_rate"] = last_month_transactions.savings_rate()
     template_context["last_month_net_worth_required_for_fi"] = template_context["last_month_spending"] * 12 * 25
 
+
+    top_10_last_month_spending_categories = []
+    for idx, value in last_month_transactions.top_n_spending_categories(n=10).iteritems():
+        top_10_last_month_spending_categories.append((idx, value))
+
+    template_context["top_10_last_month_spending_categories"] = top_10_last_month_spending_categories
+
     #Hard code the year you began working
     template_context["year_work_began"] = 2011
 
@@ -92,8 +99,14 @@ if __name__ == '__main__':
 
     average_annual_spending = np.mean([x[1] for x in annual_spending_trend])
     template_context["average_annual_spending"] = average_annual_spending
-
     template_context["all_time_net_worth_required_for_fi"] = average_annual_spending * 25
+
+
+    top_10_all_time_spending_categories = []
+    for idx, value in all_time_transactions.top_n_spending_categories(n=10).iteritems():
+        top_10_all_time_spending_categories.append((idx, value))
+
+    template_context["top_10_all_time_spending_categories"] = top_10_all_time_spending_categories
 
     html  =  template.render(template_context)
 
