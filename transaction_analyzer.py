@@ -35,6 +35,11 @@ class TransactionData():
         years.sort()
         return years
 
+    def top_n_spending_categories(self, n):
+        filtered_data = self.data[-(self.data["Category"].isin(TransactionData.remove_from_expenses_and_income)) & (self.data["Transaction Type"] == "debit")]
+        filtered_data_grouped = filtered_data.groupby("Category")
+        return filtered_data_grouped["Amount"].sum().sort_values(ascending=False)[0:n]
+
     def filter_dates(self, begin_datetime = None, end_datetime = None, year = None, month = None):
         if begin_datetime:
             self.data = self.data[self.data["Date"] >= begin_datetime]
@@ -47,4 +52,4 @@ class TransactionData():
 
 if __name__ == "__main__":
     a = TransactionData("transactions.csv")
-    print a.average_annual_spending()
+    a.top_n_spending_categories(5)
