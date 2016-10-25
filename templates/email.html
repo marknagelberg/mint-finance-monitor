@@ -40,7 +40,7 @@
 
 
         <div class="last-month">
-            <h2>Last Month's Performance</h2>
+            <h2>Last Month ({{last_month_name}})  Performance</h2>
             Total income: {{last_month_after_tax_income | currency_filter}}
             <br>
 
@@ -80,7 +80,7 @@
         </div>
 
         <div class="top-spending-categories-last-month">
-            <h2>Top 10 Spending Categories Last Month</h2>
+            <h2>Top 10 Spending Categories Last Month ({{last_month_name}})</h2>
             {% for category in top_10_last_month_spending_categories %}
             {{category[0]}}: {{category[1] | currency_filter}}
             <br>

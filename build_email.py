@@ -9,6 +9,19 @@ import pandas as pd
 import csv
 import numpy as np
 
+month_mapper = {1: "January",
+                2: "February",
+                3: "March",
+                4: "April",
+                5: "May",
+                6: "June",
+                7: "July",
+                8: "August",
+                9: "September",
+                10: "October",
+                11: "November",
+                12: "December"}
+
 def currency_filter(value):
     return "${:,.0f}".format(value)
 
@@ -66,6 +79,8 @@ if __name__ == '__main__':
 
 
     last_month_transactions.filter_dates(year = last_month_year, month = last_month)
+
+    template_context["last_month_name"] = month_mapper[last_month]
 
     template_context["last_month_after_tax_income"] = last_month_transactions.after_tax_income()
     template_context["last_month_spending"] = last_month_transactions.spending()
