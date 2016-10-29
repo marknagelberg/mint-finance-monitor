@@ -129,17 +129,16 @@ if __name__ == '__main__':
     sender = email_info["sender"]
     receivers = email_info["receivers"]
 
-    for receiver in receivers:
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = "Mint Financial Independence Report"
-        msg['From'] = sender
-        msg['To'] = receiver
-        msg.attach(MIMEText(html, 'html'))
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = "Mint Financial Independence Report"
+    msg['From'] = sender
+    msg['To'] = ",".join(receivers)
+    msg.attach(MIMEText(html, 'html'))
 
-        s = smtplib.SMTP_SSL(host = 'smtp.gmail.com', port = 465)
-        email_login_info = json.load(open('email_user_pass.json'))
-        s.login(user = email_login_info['username'], password = email_login_info['password'])
+    s = smtplib.SMTP_SSL(host = 'smtp.gmail.com', port = 465)
+    email_login_info = json.load(open('email_user_pass.json'))
+    s.login(user = email_login_info['username'], password = email_login_info['password'])
 
-        s.sendmail(sender, receiver, msg.as_string())
+    s.sendmail(sender, receivers, msg.as_string())
 
-        s.quit()
+    s.quit()
