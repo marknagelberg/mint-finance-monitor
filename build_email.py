@@ -2,7 +2,6 @@ from jinja2 import Environment, FileSystemLoader
 import datetime
 from transaction_analyzer import TransactionData
 import smtplib
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import json
 import pandas as pd
@@ -129,11 +128,10 @@ if __name__ == '__main__':
     sender = email_info["sender"]
     receivers = email_info["receivers"]
 
-    msg = MIMEMultipart('alternative')
+    msg = MIMEText(html, 'html')
     msg['Subject'] = "Mint Financial Independence Report"
     msg['From'] = sender
     msg['To'] = ",".join(receivers)
-    msg.attach(MIMEText(html, 'html'))
 
     s = smtplib.SMTP_SSL(host = 'smtp.gmail.com', port = 465)
     email_login_info = json.load(open('email_user_pass.json'))
